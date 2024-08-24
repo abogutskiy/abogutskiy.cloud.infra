@@ -16,11 +16,5 @@
         "action": "unpack",
         "target": "/etc/xray",
         "user": "monitoring:monitoring"
-    },
-    {
-        "config": "amnezia_configs.tar.gz",
-        "action": "unpack",
-        "target": "/etc/amnezia",
-        "user": "monitoring:monitoring"
     }
 ]
