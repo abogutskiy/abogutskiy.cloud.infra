@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  wireguard:
+    image: pure-wireguard:latest
+    container_name: wireguard-vpn
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    volumes:
+      - /lib/modules:/lib/modules
+      - ./wg0.conf:/etc/wireguard/wg0.conf
+    ports:
+      - "51820:51820/udp"
+    restart: unless-stopped
+
+  xray:
+    image: teddysun/xray:latest
+    container_name: xray
+    volumes:
+      - ./xray/config.json:/etc/xray/config.json
+      - ./xray/log:/var/log/xray
+    ports:
+      - "9090:9090"    # Change to your Xray port
+      - "443:443"      # If using TLS, adjust as necessary
+    restart: unless-stopped
+
+  amnesia:
+    image: amnesia:latest   # Replace with the correct image name if different
+    container_name: amnesia
+    volumes:
+      - ./amnesia/config:/etc/amnesia/config
+      - ./amnesia/data:/var/lib/amnesia/data
+    ports:
+      - "9000:9000"    # Change to the port used by Amnesia
+    environment:
+      - AMNESIA_SETTING=value   # Add any necessary environment variables here
+    restart: unless-stopped

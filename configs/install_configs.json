@@ -1,0 +1,26 @@
+[
+    {
+        "config": "abogutskiy.cloud.service",
+        "action": "copy",
+        "target": "/etc/systemd/system/abogutskiy.cloud.service",
+        "user": "monitoring:monitoring"
+    },
+    {
+        "config": "wireguard_configs.tar.gz",
+        "action": "unpack",
+        "target": "/etc/wireguard",
+        "user": "monitoring:monitoring"
+    },
+    {
+        "config": "xray_configs.tar.gz",
+        "action": "unpack",
+        "target": "/etc/xray",
+        "user": "monitoring:monitoring"
+    },
+    {
+        "config": "amnezia_configs.tar.gz",
+        "action": "unpack",
+        "target": "/etc/amnezia",
+        "user": "monitoring:monitoring"
+    }
+]

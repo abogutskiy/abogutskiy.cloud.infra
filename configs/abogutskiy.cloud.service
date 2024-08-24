@@ -1,0 +1,14 @@
+[Unit]
+Description=Docker Compose  abogutskiy.cloud service
+Requires=docker.service
+After=docker.service
+
+[Service]
+WorkingDirectory=/home/abogutskiy/abogutskiy.cloud.infra/docker-compose/local.yml
+ExecStart=docker compose up -d
+ExecStop=docker compose down
+Restart=always
+User=monitoring
+
+[Install]
+WantedBy=multi-user.target
