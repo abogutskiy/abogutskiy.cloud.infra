@@ -3,7 +3,7 @@ FROM ubuntu:latest
 
 # Install WireGuard and other necessary tools
 RUN apt-get update && \
-    apt-get install -y wireguard iproute2 resolvconf && \
+    apt-get install -y wireguard iproute2 resolvconf iptables && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

@@ -9,7 +9,7 @@ services:
       - SYS_MODULE
     volumes:
       - /lib/modules:/lib/modules
-      - ./wg0.conf:/etc/wireguard/wg0.conf
+      - /etc/wireguard/wg0.conf:/etc/wireguard/wg0.conf
     ports:
       - "51820:51820/udp"
     restart: unless-stopped
@@ -18,8 +18,8 @@ services:
     image: teddysun/xray:latest
     container_name: xray
     volumes:
-      - ./xray/config.json:/etc/xray/config.json
-      - ./xray/log:/var/log/xray
+      - /etc/xray/config.json:/etc/xray/config.json
+      - /etc/xray/log:/var/log/xray
     ports:
       - "9090:9090"    # Change to your Xray port
       - "443:443"      # If using TLS, adjust as necessary
