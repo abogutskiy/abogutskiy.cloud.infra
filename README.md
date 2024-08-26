@@ -1,0 +1,38 @@
+# About 
+This is a repository with the default configuration for abogutskiy.cloud 
+droplets. It includes configuration for [Nginx](https://nginx.org/en/), 
+[Wireguard](https://www.wireguard.com/), [XRay](https://github.com/XTLS/Xray-core)
+and (`TODO`) [amnezia](https://amnezia.org/en) docker images. 
+
+There are two ways to setup docker:
+ * default
+ * isolated
+
+Default setup is used for production droplets used in abogutskiy.cloud
+dns records. Isolated setup
+
+hais useful for simple NO TLS configuration
+
+# Default setup
+This setup locate configs on host machine and mount them into containers.
+This approach is useful  cos we can see/modify configs without rebuilding 
+the container. 
+
+For production setup we locate wireguard configs in */etc/wireguard*, xray 
+configs in */etc/xray*, amnezia in */etc/amnezia*, ssl certs in */var/certs*
+and static content for nginx in */var/www*.
+
+`TODO: add setup with that mount configs in a temporary folder, think about
+configuring the temporary folder path`
+
+# Isolated setup
+`TODO: add scripts, images, configs and description`
+
+# Prerequisites
+
+This setup can be used on any linux VM, but you need to install docker, 
+git, git-crypto, setup ipv6 and maybe something else.
+
+Setup will definitely run with:
+ * Ubuntu 24
+ * Preconfigured with https://github.com/abogutskiy/environment
