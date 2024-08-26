@@ -28,6 +28,30 @@ configuring the temporary folder path`
 # Isolated setup
 `TODO: add scripts, images, configs and description`
 
+# Supported protocols
+
+## Wireguard 
+Pure vpn tunnel, nothing more. Fast and reliable but, won't help against DPI.
+Download clients [here](https://www.wireguard.com/install/)
+
+## XRay
+Most popular protocols stack to bypass content moderation. Very popular in China,
+works even with DPI. Supports [wide range](https://github.com/XTLS/Xray-examples/tree/main/All-in-One-fallbacks-Nginx#xray---all-in-one-configuration--nginxdecoy-website)
+of protocols.
+
+In this repository we'll set up configs for:
+ * vmess + tcp + tls
+ * vless + tcp + tls (`TODO add configs`) 
+ * shadowsocks + tcp + tls (`TODO add configs`)
+ * trojan + tcp + tls (`TODO add configs`)
+
+## Amnezia
+Russian protocols stack to bypass content moderation. Popular in Russia,
+based on openVPN protocol and can use [several protocols](https://docs.amnezia.org/documentation/how-amnezia-works#how-does-traffic-masking-work-)
+to mask the traffic.
+
+ `TODO add amnezia support`
+
 # Prerequisites
 
 This setup can be used on any linux VM, but you need to install docker, 
