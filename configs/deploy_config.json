@@ -1,20 +1,31 @@
 [
     {
-        "config": "abogutskiy.cloud.service",
+        "example": true,
+        "source": "relative path to file/dir/archive in configs dir [required]",
+        "destination": "absolute path to destination dir [required]",
+        "action": "copy or unpack. unpack works with tar.gz files [required]",
+        "owner": "user:group",
+        "permissions": "string with octal repr like '644' or '755'",
+        "set_folder_attributes": "bool, works for owner and permission params, apply for destination folder itself, not only on its content",
+        "cleanup": "bool, remove destinatio befor start"
+    },
+
+    {
+        "source": "abogutskiy.cloud.service",
+        "destination": "/etc/systemd/system",
         "action": "copy",
-        "target": "/etc/systemd/system/abogutskiy.cloud.service",
-        "user": "monitoring:monitoring"
+        "permissions": "755"
     },
     {
-        "config": "wireguard_configs.tar.gz",
+        "source": "wireguard.tar.gz",
+        "destination": "/etc/wireguard",
         "action": "unpack",
-        "target": "/etc/wireguard",
-        "user": "monitoring:monitoring"
+        "cleanup": true
     },
     {
-        "config": "xray_configs.tar.gz",
+        "source": "xray.tar.gz",
+        "destination": "/etc/xray",
         "action": "unpack",
-        "target": "/etc/xray",
-        "user": "monitoring:monitoring"
+        "cleanup": true
     }
 ]
