@@ -5,6 +5,18 @@ DIR=$(dirname "$SCRIPT")
 
 sudo $DIR/deploy_configs.py $(dirname "$DIR")/configs/deploy_config.json
 
+# for wireguard ipv6 support
+sudo modprobe ip6_tables
+
 sudo systemctl daemon-reload
-sudo systemctl enable  abogutskiy.cloud.service
-sudo systemctl start abogutskiy.cloud.service
+SERVICE=abogutskiy.cloud.service
+sudo systemctl enable $SERVICE
+
+if systemctl is-active --quiet $SERVICE; then
+    echo "$SERVICE is running, restarting..."
+    sudo systemctl restart $SERVICE
+else
+    echo "$SERVICE is not running, starting..."
+    sudo systemctl start $SERVICE
+fi
+

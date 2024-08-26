@@ -27,5 +27,11 @@
         "destination": "/etc/xray",
         "action": "unpack",
         "cleanup": true
+    },
+    {
+        "source": "www.tar.gz",
+        "destination": "/var/www",
+        "action": "unpack",
+        "cleanup": true
     }
 ]

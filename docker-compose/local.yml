@@ -1,15 +1,31 @@
 services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-for-static
+    ports:
+      - "80:80"
+    volumes:
+      - /var/www:/usr/share/nginx/html:ro
+    restart: unless-stopped
+
   wireguard:
-    image: pure-wireguard:latest
-    container_name: wireguard-vpn
+    image: linuxserver/wireguard
+    container_name: wireguard
     cap_add:
       - NET_ADMIN
-      - SYS_MODULE
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London  # Adjust to your timezone
+      - SERVERPORT=51820   # Port defined in wg0.conf
+      - PEERDNS=1.1.1.1    # DNS server for clients
     volumes:
-      - /lib/modules:/lib/modules
-      - /etc/wireguard/wg0.conf:/etc/wireguard/wg0.conf
+      - /etc/wireguard:/config
     ports:
-      - "51820:51820/udp"
+      - 51820:51820/udp    # Ensure this matches your wg0.conf
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+      - net.ipv6.conf.all.disable_ipv6=0
     restart: unless-stopped
 
   xray:
