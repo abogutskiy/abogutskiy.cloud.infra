@@ -4,29 +4,33 @@ droplets. It includes configuration for [Nginx](https://nginx.org/en/),
 [Wireguard](https://www.wireguard.com/), [XRay](https://github.com/XTLS/Xray-core)
 and (`TODO`) [amnezia](https://amnezia.org/en) docker images. 
 
-There are two ways to setup docker:
+There are three ways (profiles) to setup docker:
  * default
+ * local
  * isolated
 
-Default setup is used for production droplets used in abogutskiy.cloud
-dns records. Isolated setup
+Default profile is used for production droplets used in abogutskiy.cloud
+dns records. Local profile is useful for debuging and isolated profile is 
+the most convenient one.
 
-hais useful for simple NO TLS configuration
-
-# Default setup
-This setup locate configs on host machine and mount them into containers.
-This approach is useful  cos we can see/modify configs without rebuilding 
+# Default profile
+This profile  setup locate configs on host machine and mount them into containers.
+This approach is useful cos we can see/modify configs without rebuilding 
 the container. 
 
 For production setup we locate wireguard configs in */etc/wireguard*, xray 
 configs in */etc/xray*, amnezia in */etc/amnezia*, ssl certs in */var/certs*
 and static content for nginx in */var/www*.
 
-`TODO: add setup with that mount configs in a temporary folder, think about
-configuring the temporary folder path`
+# Local profile
+The same as default profile but arrange configs in specific folder and 
+mount it from there. For instance production configs with local profile 
+and */tmp/vpn-conf* local folder will locate wireguard configs in
+*/tmp/vpn-conf/etc/wireguard*, xray configs in */tmp/vpn-conf/etc/xray*,
+etc and mount them into docker images.
 
 # Isolated setup
-`TODO: add scripts, images, configs and description`
+Just build the images with pre-copied configs inside
 
 # Supported protocols
 
