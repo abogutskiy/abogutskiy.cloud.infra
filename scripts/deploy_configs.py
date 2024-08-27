@@ -13,6 +13,8 @@ from typing import Callable, Dict, List, Union, Optional
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Deploy manager. Processes configs and certs")
     parser.add_argument("--config", required=True, type=str, help="Path to deploy config")
+    parser.add_argument("--local-destination", type=str, default=None,
+                        help="Path to destionation base dir config")
     parser.add_argument("--configs-dir", type=str, default=None,
                         help="Path to configs dir. [default = dirname(config)]")
     args = parser.parse_args()
@@ -70,6 +72,12 @@ def unpack(source: str, destination: str) -> None:
 
 def main():
     args = parse_args()
+
+    if args.local_destination is not None:
+        if os.path.exists(args.local_destination):
+            shutil.rmtree(args.local_destination)
+        os.makedirs(args.local_destination, exist_ok=True)
+
     for item in args.config:
         if item.get("example", False):
             continue
@@ -78,6 +86,9 @@ def main():
             raise Exception("source, destination and action fields are required in deploy " \
                     "config's item: {}".format(repr(item)))
         item["source"] = os.path.join(args.configs_dir, item["source"])
+        if args.local_destination:
+            item["destination"] = os.path.join(args.local_destination,
+                                               item["destination"].strip('/'))
 
         if os.path.exists(item["destination"]) and item.get("cleanup", False):
             shutil.rmtree(item["destination"])
