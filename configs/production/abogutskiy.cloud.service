@@ -4,8 +4,8 @@ Requires=docker.service
 After=docker.service
 
 [Service]
-ExecStart=docker compose -f /etc/docker/abogutskiy.cloud.compose/local.yml up
-ExecStop=docker compose -f /etc/docker/abogutskiy.cloud.compose/local.yml down
+ExecStart=docker compose -f /etc/docker/abogutskiy.cloud/compose.yml up
+ExecStop=docker compose -f /etc/docker/abogutskiy.cloud/compose.yml down
 Restart=always
 User=root
 

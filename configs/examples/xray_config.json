@@ -1,0 +1,30 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "port": 9090,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "tag": "client1",
+            "id": "jhjhj22-nmnmn2-nmnm2-nmnmn",
+            "alterId": 64
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "none"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}

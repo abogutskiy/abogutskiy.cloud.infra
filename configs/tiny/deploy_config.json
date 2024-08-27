@@ -1,0 +1,14 @@
+[
+    {
+        "source": "wireguard.tar.gz",
+        "destination": "/etc/wireguard",
+        "action": "unpack",
+        "cleanup": true
+    },
+    {
+        "source": "xray.tar.gz",
+        "destination": "/etc/xray",
+        "action": "unpack",
+        "cleanup": true
+    }
+]

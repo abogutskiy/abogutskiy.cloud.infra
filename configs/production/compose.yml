@@ -34,6 +34,7 @@ services:
     volumes:
       - /etc/xray/config.json:/etc/xray/config.json
       - /etc/xray/log:/var/log/xray
+      - /var/cert:/var/cert
     ports:
       - "9090:9090"    # Change to your Xray port
       - "443:443"      # If using TLS, adjust as necessary

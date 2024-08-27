@@ -1,15 +1,9 @@
 [
     {
-        "example": true,
-        "source": "relative path to file/dir/archive in configs dir [required]",
-        "destination": "absolute path to destination dir [required]",
-        "action": "copy or unpack. unpack works with tar.gz files [required]",
-        "owner": "user:group",
-        "permissions": "string with octal repr like '644' or '755'",
-        "set_folder_attributes": "bool, works for owner and permission params, apply for destination folder itself, not only on its content",
-        "cleanup": "bool, remove destinatio befor start"
+        "source": "compose.yml",
+        "destination": "/etc/docker/abogutskiy.cloud",
+        "action": "copy"
     },
-
     {
         "source": "abogutskiy.cloud.service",
         "destination": "/etc/systemd/system",
@@ -31,6 +25,12 @@
     {
         "source": "www.tar.gz",
         "destination": "/var/www",
+        "action": "unpack",
+        "cleanup": true
+    },
+    {
+        "source": "cert.tar.gz",
+        "destination": "/var/cert",
         "action": "unpack",
         "cleanup": true
     }

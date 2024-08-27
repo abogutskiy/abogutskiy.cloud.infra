@@ -10,20 +10,18 @@ import tarfile
 
 from typing import Callable, Dict, List, Union, Optional
 
-docker_compose_item = {
-    "source": "../docker-compose/local.yml",
-    "destination": "/etc/docker/abogutskiy.cloud.compose",
-    "action": "copy"
-}
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Deploy manager. Processes configs and certs")
-    parser.add_argument("config", type=str, help="Path to deploy config")
+    parser.add_argument("--config", required=True, type=str, help="Path to deploy config")
+    parser.add_argument("--configs-dir", type=str, default=None,
+                        help="Path to configs dir. [default = dirname(config)]")
     args = parser.parse_args()
+
+    if args.configs_dir is None:
+        args.configs_dir = os.path.dirname(os.path.abspath(args.config))
     with open(args.config, 'r') as f:
         args.config = json.loads(f.read())
-    args.repo_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    args.conf_dir = os.path.join(args.repo_dir, "configs")
+
     return args
 
 def traverse_and_apply(path: str, func: Callable[[str], None],
@@ -72,7 +70,6 @@ def unpack(source: str, destination: str) -> None:
 
 def main():
     args = parse_args()
-    args.config.append(docker_compose_item)
     for item in args.config:
         if item.get("example", False):
             continue
@@ -80,7 +77,7 @@ def main():
         if "source" not in item or "destination" not in item or "action" not in item:
             raise Exception("source, destination and action fields are required in deploy " \
                     "config's item: {}".format(repr(item)))
-        item["source"] = os.path.join(args.conf_dir, item["source"])
+        item["source"] = os.path.join(args.configs_dir, item["source"])
 
         if os.path.exists(item["destination"]) and item.get("cleanup", False):
             shutil.rmtree(item["destination"])
