@@ -29,8 +29,26 @@ and */tmp/vpn-conf* local folder will locate wireguard configs in
 */tmp/vpn-conf/etc/wireguard*, xray configs in */tmp/vpn-conf/etc/xray*,
 etc and mount them into docker images.
 
-# Isolated setup
+# Isolated profile
 Just build the images with pre-copied configs inside
+
+# Main scenarios
+
+Check prepared configs
+```./scripts/deploy_configs.py --config=path/to/config --local-destination=path/to/local/dir```
+
+Local run
+```TODO```
+
+Build isolated images
+```TODO```
+
+Isolated run
+```TODO```
+
+Deploy production configs
+```./scrips/deploy.sh```
+
 
 # Supported protocols
 
