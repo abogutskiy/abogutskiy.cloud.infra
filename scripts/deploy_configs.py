@@ -86,6 +86,7 @@ def main():
             raise Exception("source, destination and action fields are required in deploy " \
                     "config's item: {}".format(repr(item)))
         item["source"] = os.path.join(args.configs_dir, item["source"])
+
         if args.local_destination:
             item["destination"] = os.path.join(args.local_destination,
                                                item["destination"].strip('/'))
@@ -96,7 +97,9 @@ def main():
 
         action = item["action"]
         if action == "copy":
-            copy(item["source"], item["destination"])
+            dst = os.path.join(item["destination"], item["new_name"]) if item.get("new_name") \
+                else item["destination"]
+            copy(item["source"], dst)
         elif action == "unpack":
             unpack(item["source"], item["destination"])
         else:
@@ -109,6 +112,7 @@ def main():
         if "permissions" in item:
             set_permissions(item["destination"], int(item["permissions"], 8),
                             item.get("set_folder_attrs", False))
+        print(item)
 
 if __name__ == "__main__":
     main()
