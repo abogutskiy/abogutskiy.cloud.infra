@@ -6,9 +6,10 @@
         "cleanup": true
     },
     {
-        "source": "xray.tar.gz",
+        "source": "xray_config.json",
         "destination": "/etc/xray",
-        "action": "unpack",
+        "new_name": "config.json",
+        "action": "copy",
         "cleanup": true
     }
 ]

@@ -1,0 +1,92 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /var/certs/fullchain.pem:/etc/nginx/certs/fullchain.pem
+      - /var/certs/privkey.pem:/etc/nginx/certs/privkey.pem
+      - /var/www:/var/www
+    depends_on:
+      - 3xui-app
+      - wireguard
+      - xray
+    profiles:
+      - full
+
+  3xui-app:
+    build:
+      context: https://github.com/MHSanaei/3x-ui.git
+      dockerfile: Dockerfile
+    container_name: 3xui-app
+    restart: always
+    expose:
+      - "82"
+    environment:
+      DB_CONNECTION: pgsql
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${DB_NAMESPACE}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      - postgres
+    profiles:
+      - admin
+      - full
+
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAMESPACE}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    profiles:
+      - admin
+      - full
+
+  wireguard:
+    image: linuxserver/wireguard
+    container_name: wireguard
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Amsterdam
+      - SERVERPORT=51820   # Port defined in wg0.conf
+      - PEERDNS=1.1.1.1    # DNS server for clients
+    volumes:
+      - /etc/wireguard:/config
+    ports:
+      - 51820:51820/udp    # Ensure this matches your wg0.conf
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+      - net.ipv6.conf.all.disable_ipv6=0
+    restart: unless-stopped
+    profiles:
+      - full
+
+  xray:
+    image: teddysun/xray:latest
+    container_name: xray
+    volumes:
+      - /etc/xray/config.json:/etc/xray/config.json
+      - /etc/xray/log:/var/log/xray
+    ports:
+      - "9090:9090"    # Change to your Xray port
+    restart: unless-stopped
+    profiles:
+      - full
+
+volumes:
+  postgres_data:
+

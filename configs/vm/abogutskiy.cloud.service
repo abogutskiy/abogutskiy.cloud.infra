@@ -1,0 +1,13 @@
+[Unit]
+Description=Docker Compose for abogutskiy.cloud service
+Requires=docker.service
+After=docker.service
+
+[Service]
+ExecStart=docker compose --profile full -f /etc/docker/abogutskiy.cloud/compose.yml --env-file /etc/docker/abogutskiy.cloud/.env up
+ExecStop=docker compose -f /etc/docker/abogutskiy.cloud/compose.yml down -
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target

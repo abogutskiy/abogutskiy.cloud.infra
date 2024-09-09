@@ -5,20 +5,31 @@
         "action": "copy"
     },
     {
+        "source": ".env",
+        "destination": "/etc/docker/abogutskiy.cloud",
+        "action": "copy"
+    },
+    {
+        "source": "nginx.conf",
+        "destination": "/etc/nginx",
+        "action": "copy"
+    },
+    {
         "source": "abogutskiy.cloud.service",
         "destination": "/etc/systemd/system",
         "action": "copy",
         "permissions": "755"
     },
     {
-        "source": "wireguard.tar.gz",
-        "destination": "/etc/wireguard",
-        "action": "unpack",
+        "source": "xray_config.json",
+        "destination": "/etc/xray",
+        "new_name": "config.json",
+        "action": "copy",
         "cleanup": true
     },
     {
-        "source": "xray.tar.gz",
-        "destination": "/etc/xray",
+        "source": "wireguard.tar.gz",
+        "destination": "/etc/wireguard",
         "action": "unpack",
         "cleanup": true
     },
@@ -30,7 +41,7 @@
     },
     {
         "source": "cert.tar.gz",
-        "destination": "/var/cert",
+        "destination": "/var/certs",
         "action": "unpack",
         "cleanup": true
     }

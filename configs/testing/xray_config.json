@@ -1,0 +1,92 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+    "api": {
+    "tag": "api",
+    "services": [
+      "HandlerService",
+      "LoggerService",
+      "StatsService"
+    ]
+  },
+    "policy": {
+    "levels": {
+      "0": {
+        "handshake": 4,
+        "connIdle": 300,
+        "uplinkOnly": 5,
+        "downlinkOnly": 30,
+        "statsUserUplink": true,
+        "statsUserDownlink": true
+      }
+    },
+    "system": {
+      "statsInboundUplink": true,
+      "statsInboundDownlink": true
+    }
+  },
+  "inbounds": [
+    {
+      "port": 8080,
+      "protocol": "dokodemo-door",
+      "settings": {
+        "address": "127.0.0.1"
+      },
+      "tag": "api"
+    },
+    {
+      "port": 9090,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "tag": "mac os",
+            "id": "a4cfe765-b3a3-4b2f-a732-43a155ad0a62",
+            "alterId": 64
+          },
+          {
+            "tag": "ios",
+            "id": "8e9c581d-fab8-4d2c-851e-0d16602a46cc",
+            "alterId": 64
+          },
+          {
+            "tag": "bella",
+            "id": "f70d7cf7-308f-4cb7-ab59-c337215c72a3",
+            "alterId": 64
+          },
+          {
+            "tag": "lia",
+            "id": "56648efb-8564-4e5b-80b9-b0791d48fb0a",
+            "alterId": 64
+          },
+          {
+              "tag": "mom",
+              "id": "5619b043-9a27-4901-af55-5ea33220773d",
+              "alterId": 64
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp"
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ],
+  "routing": {
+    "rules": [
+      {
+        "type": "field",
+        "inboundTag": [
+          "api"
+        ],
+        "outboundTag": "api"
+      }
+    ]
+  }
+}
