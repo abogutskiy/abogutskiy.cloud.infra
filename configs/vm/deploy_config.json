@@ -40,7 +40,7 @@
         "cleanup": true
     },
     {
-        "source": "cert.tar.gz",
+        "source": "certs.tar.gz",
         "destination": "/var/certs",
         "action": "unpack",
         "cleanup": true
