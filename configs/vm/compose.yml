@@ -83,9 +83,16 @@ services:
     volumes:
       - /etc/xray/config.json:/etc/xray/config.json
       - /etc/xray/log:/var/log/xray
+      - /var/certs:/var/certs
+      - /var/log/xray:/var/log/xray
     ports:
       - "9090-9100:9090-9100"
     restart: unless-stopped
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    cap_add:
+      - NET_ADMIN
     profiles:
       - full
 

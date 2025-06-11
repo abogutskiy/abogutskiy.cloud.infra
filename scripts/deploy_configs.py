@@ -68,7 +68,7 @@ def unpack(source: str, destination: str) -> None:
         raise Exception("source path doesn't exist {}".format(source))
 
     with tarfile.open(source, "r:gz") as tar:
-        tar.extractall(path=destination)
+        tar.extractall(path=destination, filter="tar")
 
 def main():
     args = parse_args()
