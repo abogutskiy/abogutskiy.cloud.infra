@@ -1,0 +1,132 @@
+:root {
+    --light-bg-color: #bbb;
+    --light-txt-color: #111;
+    --light-debug-txt-color: #999;
+    --dark-bg-color: #333;
+    --dark-txt-color: #bbb;
+    --dark-debug-txt-color: #555;
+}
+
+body {
+    margin-left: 2em;
+    margin-top: 2em;
+    font-family: 'Public Sans';
+}
+
+div#main_block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+}
+
+div.data_block {
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
+h1#header {
+    margin-top: 1em;
+}
+
+h3.list_header{
+    margin-bottom: -0.5em;
+}
+
+ul.links_list {
+}
+
+div#about_block {
+    margin-left: 2em;
+    margin-right: 2em;
+}
+
+a.silent_link {
+  text-decoration: none;
+  color: inherit;
+}
+
+a.with_link_symbol::after {
+  content: "\FEFF\F0C1";
+  font-family: "FontAwesome";
+  vertical-align: super;
+  font-size: 0.55em;
+  position: relative;
+  left: -0.1em;
+  top: -0.3em;
+}
+
+
+div#name_spelling_box {
+    position: absolute;
+    bottom: 1em;
+    left: 1em;
+    font-size: 0.1px;
+}
+
+div#debug_block {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+}
+
+@media (max-width: 768px) {
+    /* mobile css */
+    body {
+        font-size: 18px;
+    }
+    div#main_block {
+        width: 20em;
+    }
+    div.data_block {
+        font-size: 14px;
+    }
+    div#debug_block {
+        font-size: 6px;
+    }
+}
+
+@media (min-width: 769px) {
+    /* desktop css */
+    body {
+        font-size: 22px;
+    }
+    div#main_block {
+        width: 30em;
+    }
+    div.data_block {
+        font-size: 18px;
+    }
+    div#debug_block {
+        font-size: 10px;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Dark theme styles go here */
+    body {
+        background: var(--dark-bg-color);
+        color: var(--dark-txt-color);
+    }
+    div#name_spelling_box {
+        color: var(--dark-bg-color);
+    }
+    div#debug_block {
+        color: var(--dark-debug-txt-color);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+  /* Light theme styles go here */
+    body {
+        background: var(--light-bg-color);
+        color: var(--light-txt-color);
+    }
+    div#name_spelling_box {
+        color:  var(--light-bg-color);
+    }
+    div#debug_block {
+        color: var(--light-debug-txt-color);
+    }
+}
+

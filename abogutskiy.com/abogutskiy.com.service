@@ -1,0 +1,20 @@
+[Unit]
+Description=Docker for caddy with abogutskiy.com
+Documentation=https://caddyserver.com/docs/
+StartLimitIntervalSec=0
+After=network.target
+
+[Service]
+Restart=always
+RestartSec=5
+ExecStart=docker compose --profile full -f /etc/docker/abogutskiy.com/compose.yml --env-file /etc/docker/abogutskiy.com/.env up
+ExecStop=docker compose -f /etc/docker/abogutskiy.com/compose.yml down -
+LimitNOFILE=1048576
+LimitNPROC=512
+PrivateTmp=true
+ProtectSystem=full
+User=www-data
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+
+[Install]
+WantedBy=multi-user.target

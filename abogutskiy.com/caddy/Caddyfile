@@ -1,0 +1,24 @@
+http://abogutskiy.com {
+    redir https://abogutskiy.com{uri}
+}
+
+https://abogutskiy.com {
+    root * /var/www
+    try_files html/{path}.html /{path}
+    file_server {
+        index html/index.html
+    }
+
+    file_server
+    templates
+    encode zstd gzip
+    header /api Access-Control-Allow-Origin *
+
+    log {
+        output file /var/log/caddy/abogutskiy.access.log {
+            roll_size 512mb
+            roll_keep 2
+        }
+    }
+}
+

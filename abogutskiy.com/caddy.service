@@ -1,0 +1,22 @@
+[Unit]
+Description=Docker for caddy with abogutskiy.com
+Documentation=https://caddyserver.com/docs/
+StartLimitIntervalSec=0
+After=network.target
+
+[Service]
+Restart=always
+RestartSec=5
+PIDFile=/run/caddy.pid
+ExecStart=/usr/bin/caddy run --environ --config /etc/caddy/Caddyfile
+ExecReload=/usr/bin/caddy reload --config /etc/caddy/Caddyfile
+ExecStop=/bin/kill -s TERM $MAINPID
+LimitNOFILE=1048576
+LimitNPROC=512
+PrivateTmp=true
+ProtectSystem=full
+User=www-data
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+
+[Install]
+WantedBy=multi-user.target

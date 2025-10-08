@@ -1,0 +1,12 @@
+services:
+  caddy_server:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    container_name: abogutskiy.com
+    ports:
+      - "80:80"
+      - "443:443"
+      - "2019:2019"  # Maps the Caddy Admin API
+    restart: unless-stopped
+
