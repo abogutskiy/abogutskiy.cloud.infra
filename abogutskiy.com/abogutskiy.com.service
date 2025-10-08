@@ -7,8 +7,8 @@ After=network.target
 [Service]
 Restart=always
 RestartSec=5
-ExecStart=docker compose --profile full -f /etc/docker/abogutskiy.com/compose.yml --env-file /etc/docker/abogutskiy.com/.env up
-ExecStop=docker compose -f /etc/docker/abogutskiy.com/compose.yml down -
+ExecStart=docker compose --profile full -f /etc/docker/abogutskiy.com/compose.yaml --env-file /etc/docker/abogutskiy.com/.env up
+ExecStop=docker compose -f /etc/docker/abogutskiy.com/compose.yaml down -
 LimitNOFILE=1048576
 LimitNPROC=512
 PrivateTmp=true

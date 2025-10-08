@@ -1,8 +1,6 @@
 services:
   caddy_server:
-    build:
-      context: .
-      dockerfile: ./docker/Dockerfile
+    image: abogutskiy.com:latest
     container_name: abogutskiy.com
     ports:
       - "80:80"
