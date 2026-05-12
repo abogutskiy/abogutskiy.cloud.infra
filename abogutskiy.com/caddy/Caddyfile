@@ -4,15 +4,10 @@ http://abogutskiy.com {
 
 https://abogutskiy.com {
     root * /var/www
-    try_files html/{path}.html /{path}
-    file_server {
-        index html/index.html
-    }
-
+    try_files html{path}/home.html html{path}.html {path}
     file_server
     templates
     encode zstd gzip
-    header /api Access-Control-Allow-Origin *
 
     log {
         output file /var/log/caddy/abogutskiy.access.log {
